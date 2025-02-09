@@ -7,6 +7,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "great-vibes": ['"Great Vibes"', "cursive"],
+      },
+      animation: {
+        float: "float 3s ease-in-out infinite",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
