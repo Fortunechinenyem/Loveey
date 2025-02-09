@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="UTF-8" />
 
-        <meta name="description" content="Loveet" />
+        <meta name="description" content="Loveey" />
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
