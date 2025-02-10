@@ -70,7 +70,6 @@ export default function Home() {
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
 
-      {/* Floating Hearts */}
       <style jsx>{`
         @keyframes float {
           0%,
@@ -137,6 +136,12 @@ export default function Home() {
           }}
         />
       ))}
+      <div className="border-t border-gray-800 mt-8 pt-8 text-center text-black">
+        <p>
+          &copy; {new Date().getFullYear()} Loveey. All rights reserved. created
+          by Fortune.dev
+        </p>
+      </div>
     </div>
   );
 }

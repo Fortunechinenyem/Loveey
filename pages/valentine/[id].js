@@ -14,6 +14,7 @@ const messages = [
   "My heart is and always will be yours.",
   "I cherish every second I spend with you.",
   "You are my forever and always.",
+  "I dey for you....",
 ];
 
 export default function Valentine() {
@@ -116,6 +117,12 @@ export default function Valentine() {
             Share on Twitter
           </div>
         </TwitterShareButton>
+      </div>
+      <div className="border-t border-gray-800 mt-8 pt-8 text-center text-black">
+        <p>
+          &copy; {new Date().getFullYear()} Loveey. All rights reserved. created
+          by Fortune.dev
+        </p>
       </div>
     </div>
   );
