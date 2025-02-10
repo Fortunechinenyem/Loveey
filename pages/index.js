@@ -39,7 +39,7 @@ export default function Home() {
         Your browser does not support the audio element.
       </audio>
 
-      <h1 className="text-6xl mb-8 text-shadow-lg animate-float">
+      <h1 className="text-4xl mb-8 text-shadow-lg animate-float">
         Create Your Valentine's Message 💌
       </h1>
 

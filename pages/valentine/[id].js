@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 
-// Personalized and intimate messages
 const messages = [
   "Every moment with you feels like a dream come true.",
   "Your smile is my favorite thing in the world.",
@@ -24,7 +23,6 @@ export default function Valentine() {
   const [isCopied, setIsCopied] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // Automatically cycle through messages every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
@@ -33,7 +31,6 @@ export default function Valentine() {
     return () => clearInterval(interval);
   }, []);
 
-  // Copy the link to the clipboard
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
       const link = window.location.href;
@@ -49,7 +46,6 @@ export default function Valentine() {
     }
   };
 
-  // Toggle music
   const toggleMusic = () => {
     if (typeof window !== "undefined") {
       const audio = document.querySelector("audio");
