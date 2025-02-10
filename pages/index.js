@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Confetti from "react-confetti";
@@ -12,8 +13,8 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 5000); // Show confetti for 5 seconds
-    const uniqueId = uuidv4(); // Generate a unique ID
+    setTimeout(() => setShowConfetti(false), 5000);
+    const uniqueId = uuidv4();
     const uniqueLink = `/valentine/${uniqueId}?name=${encodeURIComponent(
       name
     )}`;
@@ -38,12 +39,10 @@ export default function Home() {
         Your browser does not support the audio element.
       </audio>
 
-      {/* Title */}
       <h1 className="text-6xl mb-8 text-shadow-lg animate-float">
         Create Your Valentine's Message 💌
       </h1>
 
-      {/* Form */}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-4 bg-white/20 backdrop-blur-sm p-8 rounded-2xl shadow-lg"
@@ -60,11 +59,10 @@ export default function Home() {
           type="submit"
           className="w-72 p-4 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
         >
-          Generate Link 💖
+          Generate Link
         </button>
       </form>
 
-      {/* Music Toggle Button */}
       <button
         onClick={toggleMusic}
         className="mt-6 p-3 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
@@ -129,7 +127,6 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Add floating hearts */}
       {[...Array(10)].map((_, i) => (
         <div
           key={i}

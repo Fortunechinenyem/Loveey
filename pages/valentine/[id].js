@@ -64,7 +64,6 @@ export default function Valentine() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-400 to-pink-200 text-white font-great-vibes text-center p-5">
-      {/* Background Music */}
       {typeof window !== "undefined" && (
         <audio autoPlay loop>
           <source src="/valsong.mp3" type="audio/mpeg" />
@@ -72,12 +71,10 @@ export default function Valentine() {
         </audio>
       )}
 
-      {/* Title */}
-      <h1 className="text-6xl mb-8 text-shadow-lg animate-float">
+      <h1 className="text-4xl mb-8 text-shadow-lg animate-float">
         Happy Valentine's Day, {name}! 💖
       </h1>
 
-      {/* Slideshow of Messages */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentMessageIndex}
@@ -90,12 +87,10 @@ export default function Valentine() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Message Counter */}
       <div className="mt-4 text-lg text-pink-800">
         {currentMessageIndex + 1} of {messages.length}
       </div>
 
-      {/* Share Button */}
       <button
         onClick={handleCopyLink}
         className="mt-8 px-6 py-3 bg-pink-600 text-white rounded-lg shadow-md hover:bg-pink-700 transition-colors"
@@ -103,7 +98,6 @@ export default function Valentine() {
         {isCopied ? "Copied!" : "Share this Link"}
       </button>
 
-      {/* Music Toggle Button */}
       <button
         onClick={toggleMusic}
         className="mt-4 px-6 py-3 bg-pink-600 text-white rounded-lg shadow-md hover:bg-pink-700 transition-colors"
@@ -111,7 +105,6 @@ export default function Valentine() {
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
 
-      {/* Social Media Sharing Buttons */}
       <div className="mt-4 flex gap-4">
         <FacebookShareButton
           url={typeof window !== "undefined" ? window.location.href : ""}
