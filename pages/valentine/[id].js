@@ -120,8 +120,8 @@ export default function Valentine() {
       </div>
       <div className="border-t border-gray-800 mt-8 pt-8 text-center text-black">
         <p>
-          &copy; {new Date().getFullYear()} Loveey. All rights reserved. created
-          by Fortune.dev
+          &copy; {new Date().getFullYear()} Loveey. All rights reserved. Created
+          by Fortune(Iya in Tech)
         </p>
       </div>
     </div>
