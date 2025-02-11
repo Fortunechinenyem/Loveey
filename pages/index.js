@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Confetti from "react-confetti";
 import { v4 as uuidv4 } from "uuid";
@@ -9,6 +9,23 @@ export default function Home() {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const valentinesDay = new Date("February 14, 2025 00:00:00").getTime();
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = valentinesDay - now;
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +56,7 @@ export default function Home() {
         Your browser does not support the audio element.
       </audio>
 
-      <h1 className="text-4xl mb-8 text-shadow-lg animate-float">
+      <h1 className="text-4xl mb-8 font-great-vibes  text-shadow-lg animate-float">
         Create Your Valentine's Message 💌
       </h1>
 
@@ -69,6 +86,12 @@ export default function Home() {
       >
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
+      <div className="p-4 font-great-vibes ">
+        <h2 className="text-2xl font-great-vibes font-bold mb-4">
+          Countdown to Valentine's Day
+        </h2>
+        <p className="text-3xl  font-great-vibes text-pink-600">{timeLeft}</p>
+      </div>
 
       <style jsx>{`
         @keyframes float {
@@ -136,12 +159,10 @@ export default function Home() {
           }}
         />
       ))}
-      <div className="border-t border-gray-800 mt-8 pt-8 text-center text-black">
-        <p>
-          &copy; {new Date().getFullYear()} Loveey. All rights reserved. Created
-          by Fortune(Iya in Tech)
-        </p>
-      </div>
+      <footer className="border-t border-gray-300 mt-8 pt-4 text-sm text-white/90">
+        &copy; {new Date().getFullYear()} Loveey. All rights reserved. Created
+        with ❤️ by Fortune (Iya in Tech)
+      </footer>
     </div>
   );
 }
