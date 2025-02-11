@@ -106,10 +106,10 @@ export default function Valentine() {
         </p>
       )}
 
-      <div className="flex flex-col md:flex-row gap-4 mt-4 w-full max-w-md">
+      {/* <div className="flex flex-col md:flex-row gap-4 mt-4 w-full max-w-md">
         <VoiceRecorder />
         <PhotoUpload />
-      </div>
+      </div> */}
 
       <div className="flex gap-4 mt-6">
         <button
