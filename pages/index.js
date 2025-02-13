@@ -127,7 +127,6 @@ export default function Home() {
           ))}
         </select>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-72 p-4 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
@@ -136,7 +135,6 @@ export default function Home() {
         </button>
       </form>
 
-      {/* Music Toggle Button */}
       <button
         onClick={toggleMusic}
         className="mt-6 p-3 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
@@ -144,7 +142,6 @@ export default function Home() {
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
 
-      {/* Countdown Timer */}
       <div className="p-4 font-great-vibes">
         <h2 className="text-2xl font-great-vibes font-bold mb-4">
           Countdown to Valentine's Day
@@ -155,7 +152,10 @@ export default function Home() {
       <footer className="border-t border-gray-300 mt-8 pt-4 text-sm text-white/90">
         &copy; {new Date().getFullYear()} Loveey. All rights reserved. Created
         with ❤️ by Fortune (Iya in Tech) |
-        <a href="tel:+2348067585444" className="text-white underline ml-2">
+        <a
+          href="tel:+2348067585444"
+          className="text-white font-great-vibes ml-2"
+        >
           📞 Call me
         </a>
       </footer>

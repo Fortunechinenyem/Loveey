@@ -95,7 +95,7 @@ export default function Valentine() {
       </div>
 
       <motion.div
-        className="bg-white/20 p-6 rounded-xl shadow-lg backdrop-blur-sm text-center max-w-lg"
+        className="flex flex-col items-center gap-4 bg-white/50  backdrop-blur-sm p-8 rounded-2xl shadow-lg"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
@@ -161,7 +161,10 @@ export default function Valentine() {
       <footer className="border-t border-gray-300 mt-8 pt-4 text-sm text-white/90">
         &copy; {new Date().getFullYear()} Loveey. All rights reserved. Created
         with ❤️ by Fortune (Iya in Tech) |
-        <a href="tel:+2348067585444" className="text-white underline ml-2">
+        <a
+          href="tel:+2348067585444"
+          className="text-white font-great-vibes ml-2"
+        >
           📞 Call me
         </a>
       </footer>
