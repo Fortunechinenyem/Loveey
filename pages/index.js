@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Confetti from "react-confetti";
 import { v4 as uuidv4 } from "uuid";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [sender, setSender] = useState("");
   const [customMessage, setCustomMessage] = useState("");
+  const [showReviewForm, setShowReviewForm] = useState(false); // State to control the visibility of the review form
 
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
@@ -19,6 +21,7 @@ export default function Home() {
     { name: "Song 1", path: "/valsong.mp3" },
     { name: "Song 2", path: "/song2.mp3" },
     { name: "Song 3", path: "/song3.mp3" },
+    { name: "Song 4", path: "/song4.mp3" },
   ];
 
   useEffect(() => {
@@ -142,6 +145,24 @@ export default function Home() {
         {isPlaying ? "Pause Music" : "Play Music"}
       </button>
 
+      <button
+        onClick={() => setShowReviewForm(!showReviewForm)}
+        className="mt-6 p-3 text-lg bg-white/30 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
+      >
+        {showReviewForm ? "Close Review Form" : "Leave a Review"}
+      </button>
+
+      {showReviewForm && (
+        <motion.div
+          className="mt-6 w-full max-w-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+        >
+          <ReviewForm />
+        </motion.div>
+      )}
+
       <div className="p-4 font-great-vibes">
         <h2 className="text-2xl font-great-vibes font-bold mb-4">
           Countdown to Valentine's Day
@@ -160,5 +181,91 @@ export default function Home() {
         </a>
       </footer>
     </div>
+  );
+}
+
+function ReviewForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [review, setReview] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message: review }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(
+          "Thank you for your review, really Appreciate your feedback."
+        );
+        setName("");
+        setEmail("");
+        setReview("");
+      } else {
+        setMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center gap-4 bg-white/20 backdrop-blur-sm p-8 rounded-2xl shadow-lg"
+    >
+      <input
+        type="text"
+        placeholder="Your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+        className="w-full p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+      />
+
+      <input
+        type="email"
+        placeholder="Your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        className="w-full p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+      />
+
+      <textarea
+        placeholder="Write your review..."
+        value={review}
+        onChange={(e) => setReview(e.target.value)}
+        required
+        className="w-full p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+        rows={4}
+      />
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full p-4 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? "Submitting..." : "Submit Review"}
+      </button>
+
+      {message && (
+        <p className="mt-4 text-lg text-pink-600 font-semibold">{message}</p>
+      )}
+    </form>
   );
 }
