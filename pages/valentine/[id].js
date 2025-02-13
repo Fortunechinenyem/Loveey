@@ -215,7 +215,9 @@ function ReviewForm() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Thank you for your review!");
+        setMessage(
+          "Thank you for your review, really Appreciate your feedback."
+        );
         setName("");
         setEmail("");
         setReview("");
