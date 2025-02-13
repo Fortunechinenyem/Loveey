@@ -1,1 +1,1 @@
-A valentine app created with next js
+A valentine app created with next js.
