@@ -5,17 +5,16 @@ import Confetti from "react-confetti";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
-  const [name, setName] = useState(""); // Recipient's name
-  const [sender, setSender] = useState(""); // Sender's name
-  const [customMessage, setCustomMessage] = useState(""); // Custom message
+  const [name, setName] = useState("");
+  const [sender, setSender] = useState("");
+  const [customMessage, setCustomMessage] = useState("");
 
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [timeLeft, setTimeLeft] = useState("");
-  const [selectedMusic, setSelectedMusic] = useState("/valsong.mp3"); // Default music
+  const [selectedMusic, setSelectedMusic] = useState("/valsong.mp3");
 
-  // List of music options
   const musicOptions = [
     { name: "Song 1", path: "/valsong.mp3" },
     { name: "Song 2", path: "/song2.mp3" },
@@ -67,9 +66,13 @@ export default function Home() {
     setSelectedMusic(e.target.value);
   };
 
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value);
+  };
+
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-400 to-pink-200 text-white font-great-vibes text-center p-5`}
+      className={`relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-500 to-pink-400 text-white font-great-vibes text-center p-5 overflow-hidden`}
     >
       {showConfetti && <Confetti />}
       <audio autoPlay loop key={selectedMusic}>
@@ -124,6 +127,7 @@ export default function Home() {
           ))}
         </select>
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-72 p-4 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
