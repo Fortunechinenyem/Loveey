@@ -208,7 +208,7 @@ function ReviewForm() {
 
       if (response.ok) {
         setMessage(
-          "Thank you for your review, really Appreciate your feedback."
+          "Thank you for your review, really appreciate your feedback."
         );
         setName("");
         setEmail("");
