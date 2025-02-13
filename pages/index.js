@@ -167,7 +167,7 @@ export default function Home() {
         <h2 className="text-2xl font-great-vibes font-bold mb-4">
           Countdown to Valentine's Day
         </h2>
-        <p className="text-3xl font-great-vibes text-pink-600">{timeLeft}</p>
+        <p className="text-3xl font-great-vibes text-pink-200">{timeLeft}</p>
       </div>
 
       <footer className="border-t border-gray-300 mt-8 pt-4 text-sm text-white/90">
