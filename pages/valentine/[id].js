@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,7 +15,7 @@ export default function Valentine() {
 
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [selectedMusic] = useState(music || "/valsong.mp3");
+  const [selectedMusic, setSelectedMusic] = useState("/valsong.mp3");
   const [copied, setCopied] = useState(false);
 
   const messages = [
@@ -30,6 +31,12 @@ export default function Valentine() {
     "You are my forever and always.",
     "I dey for you....",
   ];
+
+  useEffect(() => {
+    if (music) {
+      setSelectedMusic(music);
+    }
+  }, [music]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,7 +68,8 @@ export default function Valentine() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-500 to-pink-400 text-white font-great-vibes text-center p-5 overflow-hidden">
-      <audio autoPlay loop>
+      {/* Reset the key to force re-render when selectedMusic changes */}
+      <audio autoPlay loop key={selectedMusic}>
         <source src={selectedMusic} type="audio/mpeg" />
       </audio>
 
@@ -151,10 +159,6 @@ export default function Valentine() {
           </div>
         </WhatsappShareButton>
       </div>
-
-      <footer className="border-t border-gray-300 mt-8 pt-4 text-sm text-white/90">
-        &copy; {new Date().getFullYear()} Loveey. Created with ❤️ by Fortune
-      </footer>
     </div>
   );
 }
