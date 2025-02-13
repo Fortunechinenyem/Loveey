@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
-import VoiceRecorder from "@/app/components/VoiceRecorder";
-import PhotoUpload from "@/app/components/PhotoUpload";
 
 export default function Valentine() {
   const router = useRouter();
@@ -13,6 +11,7 @@ export default function Valentine() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [visibleMessage, setVisibleMessage] = useState("");
   const [isClient, setIsClient] = useState(false);
+  const [selectedMusic, setSelectedMusic] = useState("/valsong.mp3");
 
   const messages = [
     "Every moment with you feels like a dream come true.",
@@ -26,6 +25,12 @@ export default function Valentine() {
     "I cherish every second I spend with you.",
     "You are my forever and always.",
     "I dey for you....",
+  ];
+
+  const musicOptions = [
+    { name: "Song 1", path: "/valsong.mp3" },
+    { name: "Song 2", path: "/song2.mp3" },
+    { name: "Song 3", path: "/song3.mp3" },
   ];
 
   useEffect(() => {
@@ -57,17 +62,23 @@ export default function Valentine() {
 
   const toggleMusic = () => {
     const audio = document.querySelector("audio");
-    if (audio) {
-      isPlaying ? audio.pause() : audio.play();
-      setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
     }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleMusicChange = (e) => {
+    setSelectedMusic(e.target.value);
   };
 
   return (
     <div className="min-h-screen  font-great-vibes flex flex-col items-center justify-center bg-gradient-to-r from-rose-300 via-pink-400 to-red-400 text-white text-center p-5 space-y-8">
       {isClient && (
-        <audio autoPlay loop>
-          <source src="/valsong.mp3" type="audio/mpeg" />
+        <audio autoPlay loop key={selectedMusic}>
+          <source src={selectedMusic} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
       )}
@@ -106,10 +117,25 @@ export default function Valentine() {
         </p>
       )}
 
-      {/* <div className="flex flex-col md:flex-row gap-4 mt-4 w-full max-w-md">
-        <VoiceRecorder />
-        <PhotoUpload />
-      </div> */}
+      <div className="flex flex-col items-center gap-4 bg-white/20 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
+        <select
+          value={selectedMusic}
+          onChange={handleMusicChange}
+          className="w-72 p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500"
+        >
+          {musicOptions.map((music, index) => (
+            <option key={index} value={music.path}>
+              {music.name}
+            </option>
+          ))}
+        </select>
+        <button
+          onClick={toggleMusic}
+          className="mt-6 p-3 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
+        >
+          {isPlaying ? "Pause Music" : "Play Music"}
+        </button>
+      </div>
 
       <div className="flex gap-4 mt-6">
         <button
@@ -117,13 +143,6 @@ export default function Valentine() {
           className="px-6 py-3 bg-pink-600 rounded-full shadow-lg hover:bg-pink-700 transition-transform transform hover:scale-105"
         >
           {isCopied ? "Copied!" : "Share this Link"}
-        </button>
-
-        <button
-          onClick={toggleMusic}
-          className="px-6 py-3 bg-red-500 rounded-full shadow-lg hover:bg-red-600 transition-transform transform hover:scale-105"
-        >
-          {isPlaying ? "Pause Music" : "Play Music"}
         </button>
       </div>
 

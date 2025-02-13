@@ -10,6 +10,13 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [timeLeft, setTimeLeft] = useState("");
+  const [selectedMusic, setSelectedMusic] = useState("/valsong.mp3");
+
+  const musicOptions = [
+    { name: "Song 1", path: "/valsong.mp3" },
+    { name: "Song 2", path: "/song2.mp3" },
+    { name: "Song 3", path: "/song3.mp3" },
+  ];
 
   useEffect(() => {
     const valentinesDay = new Date("February 14, 2025 00:00:00").getTime();
@@ -48,11 +55,15 @@ export default function Home() {
     setIsPlaying(!isPlaying);
   };
 
+  const handleMusicChange = (e) => {
+    setSelectedMusic(e.target.value);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-400 to-pink-200 text-white font-great-vibes text-center p-5">
       {showConfetti && <Confetti />}
-      <audio autoPlay loop>
-        <source src="/valsong.mp3" type="audio/mpeg" />
+      <audio autoPlay loop key={selectedMusic}>
+        <source src={selectedMusic} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
 
@@ -72,6 +83,17 @@ export default function Home() {
           required
           className="w-72 p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
         />
+        <select
+          value={selectedMusic}
+          onChange={handleMusicChange}
+          className="w-72 p-4 text-lg border-none rounded-lg bg-white/80 text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500"
+        >
+          {musicOptions.map((music, index) => (
+            <option key={index} value={music.path}>
+              {music.name}
+            </option>
+          ))}
+        </select>
         <button
           type="submit"
           className="w-72 p-4 text-lg bg-pink-600 text-white rounded-lg cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-md"
